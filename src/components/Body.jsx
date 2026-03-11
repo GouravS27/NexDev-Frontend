@@ -31,9 +31,9 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="bg-indigo-200">
+    <div className="bg-indigo-200 ">
       <Navbar />
-      <Outlet />
+      <Outlet/>
       <Footer />
     </div>
   );
