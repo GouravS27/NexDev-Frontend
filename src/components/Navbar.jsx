@@ -1,44 +1,64 @@
-import { useSelector } from "react-redux";
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../utils/constants";
+import { removeUser } from "../utils/userSlice";
+import NexDevLogo from "../logos/NexDevLogo";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
-  // console.log(user);
+  console.log(user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleLogOut = async () => {
+    try {
+      await axios.post(API_BASE_URL + "/logout", {}, { withCredentials: true });
+      dispatch(removeUser());
+      return navigate("/login");
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
   return (
-    <div className="navbar bg-base-300">
+    <div className="navbar bg-indigo-50">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">👩‍💻 DevTinder</a>
+        <Link to="/" className="btn btn-ghost hover:bg-indigo-100 transition duration-300">
+          {/* 🌐NexDev */}
+          <NexDevLogo />
+        </Link>
       </div>
       <div className="flex-none gap-2">
         <div className="form-control"></div>
         <div className="dropdown dropdown-end mx-5">
           {user && (
             <div className="flex text-sm ">
-              <p className="px-2 m-auto">Welcome! {user.firstName}</p>
+              <p className="px-2 m-auto text-indigo-500 font-bold flex">Welcome&nbsp;<p className=" text-indigo-600">{user?.firstName}!</p></p>
 
               <div
                 tabIndex={0}
                 role="button"
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div className="w-10 rounded-full">
-                  <img alt="user photo" src={user.photoUrl} />
+                <div className="w-10 rounded-full border-2 border-indigo-400">
+                  <img alt="user photo" src={user?.photoUrl}/>
                 </div>
               </div>
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-indigo-500 font-bold"
               >
                 <li>
-                  <a className="justify-between">
+                  <Link to="/profile" className="justify-between">
                     Profile
                     <span className="badge">New</span>
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <a>Settings</a>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <Link onClick={handleLogOut}>Logout</Link>
                 </li>
               </ul>
             </div>

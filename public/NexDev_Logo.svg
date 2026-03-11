@@ -1,0 +1,31 @@
+
+<svg width="420" height="140" viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5f0fef"/>
+      <stop offset="100%" stop-color="#00b4d8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Abstract N Shape -->
+  <path d="M40 100 L40 40 L80 100 L80 40"
+        stroke="url(#mainGradient)"
+        stroke-width="8"
+        fill="none"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Network Nodes -->
+  <circle cx="40" cy="40" r="6" fill="#5f0fef"/>
+  <circle cx="80" cy="40" r="6" fill="#00b4d8"/>
+  <circle cx="80" cy="100" r="6" fill="#5f0fef"/>
+
+  <!-- Brand Name -->
+  <text x="120" y="85"
+        font-size="48"
+        font-family="Poppins, Arial, sans-serif"
+        font-weight="700"
+        fill="url(#mainGradient)">
+    NexDev
+  </text>
+</svg>

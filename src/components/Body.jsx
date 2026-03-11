@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import axios from "axios";
 import { API_BASE_URL } from "../utils/constants";
@@ -10,26 +10,28 @@ import { useEffect } from "react";
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userData = useSelector((store) => store.user);
 
   // Store User info on Refresh
   const fetchUser = async () => {
+    if (userData) return; //unneccessary API calls
     try {
       const res = await axios.get(API_BASE_URL + "/profile/view", {
         withCredentials: true,
       });
       dispatch(addUser(res.data));
     } catch (err) {
-      navigate("/login");
+      if (err.status === 401) navigate("/login");
       console.error(err);
     }
   };
 
   useEffect(() => {
-    fetchUser();
+      fetchUser();
   }, []);
 
   return (
-    <div>
+    <div className="bg-indigo-200 h-screen">
       <Navbar />
       <Outlet />
       <Footer />

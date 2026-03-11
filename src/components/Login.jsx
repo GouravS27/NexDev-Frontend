@@ -8,6 +8,7 @@ import { API_BASE_URL } from "../utils/constants";
 const Login = () => {
   const [email, setEmail] = useState("singh@mail.com");
   const [password, setPassword] = useState("Test@123");
+  const [error, setError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,36 +29,36 @@ const Login = () => {
       dispatch(addUser(res.data));
       navigate("/");
     } catch (err) {
-      console.error(err);
+      setError(err.response.data);
     }
   };
 
   return (
-    <div className="flex justify-center">
-      <fieldset className="fieldset bg-base-300 border-base-300 rounded-box w-xs border p-4">
-        <legend className="fieldset-legend">Login</legend>
+    <div className="flex justify-center mt-40">
+      <fieldset className="fieldset bg-indigo-100 border-base-300 rounded-box w-xs border p-4">
+        <legend className="fieldset-legend text-xl font-bold text-indigo-500">Login</legend>
 
-        <label className="label">Email</label>
+        <label className="label text-indigo-600">Email</label>
         <input
           type="email"
-          className="input"
+          className="input text-indigo-700 font-medium"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label className="label">Password</label>
+        <label className="label text-indigo-500">Password</label>
         <input
           type="password"
-          className="input"
+          className="input text-indigo-700"
           placeholder="Password"
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
-
-        <button className="btn btn-neutral mt-4" onClick={handleLogin}>
+        <p className="text-red-500 text-center font-bold">{error}</p>
+        <button className="btn bg-indigo-300 text-indigo-800 hover:bg-indigo-400 font-bold mt-1" onClick={handleLogin}>
           Login
         </button>
       </fieldset>
