@@ -31,7 +31,7 @@ const Body = () => {
   }, []);
 
   return (
-    <div className="bg-indigo-200 h-screen">
+    <div className="bg-indigo-200">
       <Navbar />
       <Outlet />
       <Footer />
