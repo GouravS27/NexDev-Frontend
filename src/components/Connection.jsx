@@ -6,8 +6,8 @@ import { addConnections } from "../utils/connectionSlice";
 
 const Connection = () => {
   const connections = useSelector((store) => store.connection);
-//   console.log(connections);
-  
+  //   console.log(connections);
+
   const dispatch = useDispatch();
 
   const fetchConnections = async () => {
@@ -28,7 +28,9 @@ const Connection = () => {
 
   if (!connections) return <h1 className="text-indigo-600">Loading...</h1>;
   if (connections.length === 0)
-    return <h1 className="text-indigo-600 text-center">No Connections Found!</h1>;
+    return (
+      <h1 className="text-indigo-600 text-center">No Connections Found!</h1>
+    );
 
   return (
     <div className="text-center my-10 h-screen">
@@ -45,7 +47,7 @@ const Connection = () => {
           >
             <img
               alt="photo"
-              className="h-40 rounded-lg"
+              className="h-40 min-w-30 max-w-30 rounded-lg"
               src={photoUrl}
             />
 

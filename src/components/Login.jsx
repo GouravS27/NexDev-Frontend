@@ -8,6 +8,9 @@ import { API_BASE_URL } from "../utils/constants";
 const Login = () => {
   const [email, setEmail] = useState("singh@mail.com");
   const [password, setPassword] = useState("Test@123");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
@@ -33,35 +36,83 @@ const Login = () => {
     }
   };
 
+  const handleSignUp = async () => {
+    try {
+      const res = await axios.post(
+        API_BASE_URL + "/signup",
+        { firstName, lastName, email, password },
+        { withCredentials: true },
+      );
+      dispatch(addUser(res.data));
+      navigate("/profile");
+    } catch (err) {
+      setError(err.response.data);
+    }
+  };
+
   return (
-    <div className="flex justify-center mt-40">
-      <fieldset className="fieldset bg-indigo-100 border-base-300 rounded-box w-xs border p-4">
-        <legend className="fieldset-legend text-xl font-bold text-indigo-500">Login</legend>
+    <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center mb-30">
+        <fieldset className="fieldset bg-indigo-100 border-base-300 rounded-box w-xs border p-4">
+          <legend className="fieldset-legend text-xl font-bold text-indigo-500">
+            {isLogin ? "Login" : "Sign Up"}
+          </legend>
 
-        <label className="label text-indigo-600">Email</label>
-        <input
-          type="email"
-          className="input text-indigo-700 font-medium"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+          {!isLogin && (
+            <>
+              <label className="label text-indigo-600">First Name</label>
+              <input
+                type="text"
+                className="input text-indigo-700 font-medium"
+                placeholder="firstName"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
 
-        <label className="label text-indigo-500">Password</label>
-        <input
-          type="password"
-          className="input text-indigo-700"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <p className="text-red-500 text-center font-bold">{error}</p>
-        <button className="btn bg-indigo-300 text-indigo-800 hover:bg-indigo-400 font-bold mt-1" onClick={handleLogin}>
-          Login
-        </button>
-      </fieldset>
+              <label className="label text-indigo-600">Last Name</label>
+              <input
+                type="text"
+                className="input text-indigo-700 font-medium"
+                placeholder="lastName"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </>
+          )}
+
+          <label className="label text-indigo-600">Email</label>
+          <input
+            type="email"
+            className="input text-indigo-700 font-medium"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <label className="label text-indigo-500">Password</label>
+          <input
+            type="password"
+            className="input text-indigo-700"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <p className="text-red-500 text-center font-bold">{error}</p>
+          <button
+            className="btn bg-indigo-300 text-indigo-800 hover:bg-indigo-400 font-bold mt-1"
+            onClick={isLogin ? handleLogin : handleSignUp}
+          >
+            {isLogin ? "Login" : "Sign Up"}
+          </button>
+          <p
+            className="text-center font-bold text-indigo-400 cursor-pointer hover:text-indigo-700"
+            onClick={() => setIsLogin((value) => !value)}
+          >
+            {isLogin ? "New User? Signup here!" : "Existing User? Login here!"}
+          </p>
+        </fieldset>
+      </div>
     </div>
   );
 };
