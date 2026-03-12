@@ -10,7 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("Test@123");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState("");
 
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ const Login = () => {
       dispatch(addUser(res.data));
       navigate("/profile");
     } catch (err) {
-      setError(err.response.data);
+      setError(err?.response?.data || "Something went wrong");
     }
   };
 
