@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,6 +10,7 @@ import { useEffect } from "react";
 const Body = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
   const userData = useSelector((store) => store.user);
 
   // Store User info on Refresh
@@ -21,19 +22,23 @@ const Body = () => {
       });
       dispatch(addUser(res.data));
     } catch (err) {
-      if (err.status === 401) navigate("/login");
+      if (err.response?.status === 401) {
+        navigate("/login");
+        return;
+      }
       console.error(err);
     }
   };
 
   useEffect(() => {
-      fetchUser();
-  }, []);
+    if (location.pathname === "/login") return;
+    fetchUser();
+  }, [userData, location.pathname]);
 
   return (
     <div className="bg-indigo-200 ">
       <Navbar />
-      <Outlet/>
+      <Outlet />
       <Footer />
     </div>
   );
