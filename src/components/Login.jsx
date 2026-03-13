@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../utils/constants";
+import { addFeed } from "../utils/feedSlice";
 
 const Login = () => {
   const [email, setEmail] = useState("singh@mail.com");
@@ -43,7 +44,7 @@ const Login = () => {
         { firstName, lastName, email, password },
         { withCredentials: true },
       );
-      dispatch(addUser(res.data));
+      dispatch(addUser(res?.data?.data));
       navigate("/profile");
     } catch (err) {
       setError(err?.response?.data || "Something went wrong");

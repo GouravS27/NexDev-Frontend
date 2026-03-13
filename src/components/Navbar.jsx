@@ -4,6 +4,9 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import NexDevLogo from "../logos/NexDevLogo";
+import { clearFeed, removeFeed } from "../utils/feedSlice";
+import { clearRequest } from "../utils/requestSlice";
+import { clearConnections } from "../utils/connectionSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -15,6 +18,9 @@ const Navbar = () => {
     try {
       await axios.post(API_BASE_URL + "/logout", {}, { withCredentials: true });
       dispatch(removeUser());
+      dispatch(clearFeed());
+      dispatch(clearRequest());
+      dispatch(clearConnections());
       return navigate("/login");
     } catch (err) {
       console.error(err.message);
