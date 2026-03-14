@@ -27,7 +27,19 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  if (!feed || feed.length === 0) return <h1>No new users</h1>;
+  if (!feed || feed.length === 0)
+    return (
+      <div className="h-screen flex justify-center items-center gap-2 pb-20">
+        <div className="inline-grid *:[grid-area:1/1]">
+          <div className="status status-error animate-ping"></div>
+          <div className="status status-error"></div>
+        </div>
+        <h1 className="text-indigo-500 text-lg italic font-semibold">
+          You're all caught up! No more developers available for connection
+          right now. 
+        </h1>
+      </div>
+    );
 
   return (
     <div className="flex justify-center my-10">

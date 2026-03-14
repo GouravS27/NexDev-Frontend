@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../utils/constants";
-import { addFeed } from "../utils/feedSlice";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("singh@mail.com");
@@ -13,6 +13,7 @@ const Login = () => {
   const [lastName, setLastName] = useState("");
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -90,15 +91,23 @@ const Login = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <label className="label text-indigo-500">Password</label>
-          <input
-            type="password"
-            className="input text-indigo-700"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              className="input text-indigo-700 w-full pr-10"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-indigo-500"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
           <p className="text-red-500 text-center font-bold">{error}</p>
           <button
             className="btn bg-indigo-300 text-indigo-800 hover:bg-indigo-400 font-bold mt-1"

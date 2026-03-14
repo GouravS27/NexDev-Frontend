@@ -29,11 +29,19 @@ const Connection = () => {
   if (!connections) return <h1 className="text-indigo-600">Loading...</h1>;
   if (connections.length === 0)
     return (
-      <h1 className="text-indigo-600 text-center">No Connections Found!</h1>
+      <div className="h-screen flex justify-center items-center gap-2 pb-20">
+        <div className="inline-grid *:[grid-area:1/1]">
+          <div className="status status-primary animate-ping"></div>
+          <div className="status status-primary"></div>
+        </div>
+        <h1 className="text-indigo-500 text-lg italic font-semibold">
+          You have no more connections right now.
+        </h1>
+      </div>
     );
 
   return (
-    <div className="text-center my-10 h-screen">
+    <div className="text-center my-10">
       <h1 className="font-bold text-indigo-600 text-3xl mb-6">Connections</h1>
 
       {connections.map((connection) => {
