@@ -41,7 +41,7 @@ const Connection = () => {
     );
 
   return (
-    <div className="text-center my-10">
+    <div className="text-center my-10  min-h-screen">
       <h1 className="font-bold text-indigo-600 text-3xl mb-6">Connections</h1>
 
       {connections.map((connection) => {

@@ -10,7 +10,7 @@ const Requests = () => {
 
   const reviewRequest = async (status, _id) => {
     try {
-      const res = await axios.post(
+       await axios.post(
         API_BASE_URL + "/request/review/" + status + "/" + _id,
         {},
         { withCredentials: true },
