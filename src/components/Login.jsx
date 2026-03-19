@@ -8,7 +8,7 @@ import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("Test@123");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [isLogin, setIsLogin] = useState(true);
@@ -48,7 +48,12 @@ const Login = () => {
       dispatch(addUser(res?.data?.data));
       navigate("/profile");
     } catch (err) {
-      setError(err?.response?.data || "Something went wrong");
+      console.log(err)
+      setError(
+        err?.response?.data?.message ||
+          err?.response?.data ||
+          "Something went wrong",
+      );
     }
   };
 
