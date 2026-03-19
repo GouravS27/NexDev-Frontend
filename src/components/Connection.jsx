@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { API_BASE_URL } from "../utils/constants";
 import { addConnections } from "../utils/connectionSlice";
+import Loading from "./Loading";
 
 const Connection = () => {
   const connections = useSelector((store) => store.connection);
@@ -26,7 +27,7 @@ const Connection = () => {
     fetchConnections();
   }, []);
 
-  if (!connections) return <h1 className="text-indigo-600">Loading...</h1>;
+  if (!connections) return <h1 className="text-indigo-600"><Loading/></h1>;
   if (connections.length === 0)
     return (
       <div className="h-screen flex justify-center items-center gap-2 pb-20">
@@ -51,7 +52,8 @@ const Connection = () => {
         return (
           <div
             key={_id}
-className="flex flex-col sm:flex-row items-center gap-3 mb-3 p-3 rounded-lg bg-indigo-50 text-indigo-600 w-[90%] sm:w-3/4 lg:w-1/2 mx-auto"          >
+            className="flex flex-col sm:flex-row items-center gap-3 mb-3 p-3 rounded-lg bg-indigo-50 text-indigo-600 w-[90%] sm:w-3/4 lg:w-1/2 mx-auto"
+          >
             <img
               alt="photo"
               className="h-40 min-w-30 max-w-30 rounded-lg object-cover "

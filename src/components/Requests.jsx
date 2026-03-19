@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { API_BASE_URL } from "../utils/constants";
 import { addRequests, removeRequest } from "../utils/requestSlice";
+import Loading from "./Loading";
 
 const Requests = () => {
   const requests = useSelector((store) => store.requests);
@@ -37,7 +38,7 @@ const Requests = () => {
     fetchRequests();
   }, []);
 
-  if (!requests) return <h1 className="text-indigo-600">Loading...</h1>;
+  if (!requests) return <h1 className="text-indigo-600"><Loading/></h1>;
 
   if (requests.length === 0)
     return (
