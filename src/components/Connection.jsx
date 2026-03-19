@@ -51,15 +51,14 @@ const Connection = () => {
         return (
           <div
             key={_id}
-            className="flex mb-2 p-1 rounded-lg bg-indigo-50 text-indigo-600 w-1/2 mx-auto"
-          >
+className="flex flex-col sm:flex-row items-center gap-3 mb-3 p-3 rounded-lg bg-indigo-50 text-indigo-600 w-[90%] sm:w-3/4 lg:w-1/2 mx-auto"          >
             <img
               alt="photo"
-              className="h-40 min-w-30 max-w-30 rounded-lg"
+              className="h-40 min-w-30 max-w-30 rounded-lg object-cover "
               src={photoUrl}
             />
 
-            <div className="text-left mx-4 flex flex-col justify-center">
+            <div className="text-center mx-4 sm:text-left flex flex-col justify-center">
               <h2 className="font-bold text-xl">
                 {firstName + " " + lastName}
               </h2>

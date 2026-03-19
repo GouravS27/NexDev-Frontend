@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { API_BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = ({ user }) => {
   //   console.log(user);
@@ -16,6 +17,7 @@ const EditProfile = ({ user }) => {
   const [error, setError] = useState("");
   const [showToast, setShowToast] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const saveProfile = async () => {
     setError("");
@@ -36,10 +38,10 @@ const EditProfile = ({ user }) => {
 
       dispatch(addUser(res?.data?.data));
       setShowToast(true);
-
       setTimeout(() => {
         setShowToast(false);
-      }, 3000);
+        navigate("/");
+      }, 2000);
     } catch (err) {
       setError(err.response.data);
     }
@@ -47,8 +49,8 @@ const EditProfile = ({ user }) => {
 
   return (
     <>
-      <div className="flex justify-center my-10 text-indigo-500 font-semibold">
-        <div className="flex justify-center mx-10">
+      <div className="flex flex-col lg:flex-row items-center justify-center my-10 text-indigo-500 font-semibold gap-10">
+        <div className="flex justify-center">
           <div className="card bg-indigo-50 w-96 shadow-xl">
             <div className="card-body">
               <h2 className="card-title justify-center text-indigo-600 text-2xl font-bold">

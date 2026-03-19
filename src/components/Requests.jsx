@@ -10,7 +10,7 @@ const Requests = () => {
 
   const reviewRequest = async (status, _id) => {
     try {
-       await axios.post(
+      await axios.post(
         API_BASE_URL + "/request/review/" + status + "/" + _id,
         {},
         { withCredentials: true },
@@ -41,7 +41,7 @@ const Requests = () => {
 
   if (requests.length === 0)
     return (
-      <div className="h-screen flex justify-center items-center gap-2 pb-20">
+      <div className="min-h-screen flex justify-center items-center gap-2 pb-20">
         <div className="inline-grid *:[grid-area:1/1]">
           <div className="status status-primary animate-ping"></div>
           <div className="status status-primary"></div>
@@ -53,7 +53,7 @@ const Requests = () => {
     );
 
   return (
-    <div className="text-center my-10 h-screen">
+    <div className="text-center my-10 min-h-screen">
       <h1 className="font-bold text-indigo-600 text-3xl mb-6">Requests</h1>
 
       {requests.map((request) => {
@@ -63,19 +63,23 @@ const Requests = () => {
         return (
           <div
             key={_id}
-            className="flex mb-2 p-1 rounded-lg bg-indigo-50 text-indigo-600 w-1/2 mx-auto"
+            className="flex flex-col sm:flex-row items-center gap-3 mb-3 p-3 rounded-lg bg-indigo-50 text-indigo-600 w-[90%] sm:w-3/4 lg:w-1/2 mx-auto"
           >
-            <img alt="photo" className="h-40 rounded-lg" src={photoUrl} />
+            <img
+              alt="photo"
+              className="h-40 min-w-30 max-w-30 rounded-lg object-cover "
+              src={photoUrl}
+            />
 
-            <div className="text-left mx-4 flex flex-col justify-center">
+            <div className="text-center mx-4 sm:text-left flex flex-col justify-center">
               <h2 className="font-bold text-xl">
                 {firstName + " " + lastName}
               </h2>
 
               {age && gender && <p>{age + ", " + gender}</p>}
-              <p className="italic">{about}</p>
+              <p className="italic line-clamp-2">{about}</p>
 
-              <div className="my-1 flex gap-2">
+              <div className="my-1 flex gap-2 justify-center sm:justify-start">
                 <button
                   className="btn btn-primary btn-sm"
                   onClick={() => {

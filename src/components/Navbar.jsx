@@ -31,7 +31,7 @@ const Navbar = () => {
       <div className="flex-1">
         <Link
           to="/"
-          className="btn btn-ghost hover:bg-indigo-100 transition duration-300"
+          className="p-0 btn btn-ghost hover:bg-indigo-100 transition duration-300"
         >
           {/* 🌐NexDev */}
           <NexDevLogo />
@@ -42,7 +42,7 @@ const Navbar = () => {
         <div className="dropdown dropdown-end mx-5">
           {user && (
             <div className="flex text-sm ">
-              <p className="px-2 m-auto text-indigo-500 font-bold flex gap-1">
+              <p className="hidden sm:flex px-2 m-auto text-indigo-500 font-bold gap-1">
                 Welcome
                 <span className="text-indigo-600">{user?.firstName}!</span>
               </p>
@@ -59,6 +59,9 @@ const Navbar = () => {
                 tabIndex={0}
                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-indigo-500 font-bold"
               >
+                <li>
+                  <Link to="/">Explore</Link>
+                </li>
                 <li>
                   <Link to="/profile" className="justify-between">
                     Profile
